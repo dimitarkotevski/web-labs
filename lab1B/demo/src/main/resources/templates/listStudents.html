@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+  <meta charset="utf-8">
+  <title>Add new Student to Course</title>
+  <style type = "text/css">
+    body {
+      width: 800px;
+      margin: auto;
+    }
+    table {
+      width:100%;
+    }
+    table, td, th {
+      border: 1px solid black;
+      padding:3px 2px;
+    }
+    section {
+      float: left;
+      margin: 0 1.5%;
+      width: 63%;
+    }
+    aside {
+      float: right;
+      margin: 0 1.5%;
+      width: 30%;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Student Enrollment - Select the Student </h1>
+  <li th:each="student : ${studentInCourse}">
+    <tr>
+      <td>
+         <th:span th:text="${student.name}"></th:span>
+        <th:span th:text=" ${student.surname}"></th:span>  <br>
+      </td>
+    </tr>
+  </li>
+  </br>
+  </br>
+</header>
+<section>
+  <h2>Select the student to enroll:</h2>
+  <form th:method="get" th:action="@{CreateStudent}">
+    <input type="submit" name="submit" value="Create New Student">
+  </form>
+  <br/> <br/>
+  <form th:method="post" th:action="@{StudentEnrollmentSummary}">
+    <li th:each="student : ${studentNotInCourse}" style="list-style: none">
+      <tr>
+        <td>
+          <input type="radio" name="username" th:value="${student.username}">
+          <th:span th:text="${student.name}"></th:span>
+          <th:span th:text=" ${student.surname}"></th:span>  <br>
+        </td>
+      </tr>
+    </li>
+    <br/>
+
+
+    <input type="submit" name="submit">
+
+  </form>
+</section>
+<aside>
+  <table>
+    <tr>
+      <th colspan="2">
+        Your Enrollment Status
+      </th>
+    </tr>
+    <tr>
+      <td><b>Course Id</b></td>
+      <td> <th:span th:text="${courseId}"></th:span> </td>
+    </tr>
+  </table>
+</aside>
+
+</body>
+</html>

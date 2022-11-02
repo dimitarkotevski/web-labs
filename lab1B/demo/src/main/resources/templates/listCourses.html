@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="mk" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>Welcome and Choose a Course</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Courses List</h1>
+    <ul>
+        <li th:each="course : ${courses}">
+            <tr>
+                <td>
+                    <strong>Name:</strong> <th:span th:text="${course.getName()}"></th:span> <br>
+                    <strong>Description:</strong>  <th:span th:text=" ${course.getDescription()}"></th:span>  <br>
+                    <strong>Students:</strong><br/>
+
+<!--                            <li th:each="student,stat : ${course.getStudents()}">-->
+<!--                                <label th:text="${student.getName()}"></label>-->
+<!--                            </li>-->
+<!--                    <ul th:each="cou.students : ${course}">-->
+<!--                        <li th:text="${cou.username}"></li>-->
+<!--                    </ul>-->
+
+                            <th:span th:text="${course.students}"></th:span>
+                </td>
+            </tr>
+        </li>
+    </ul>
+
+</header>
+<main>
+
+    <h2>Choose course:</h2>
+    <form th:method="POST" th:action="@{AddStudent}">
+    <input type="radio" name="courseId" value="1" > Web programming<br/>
+    <input type="radio" name="courseId" value="2" > Operating System<br/>
+    <input type="radio" name="courseId" value="3" > Electronic and Mobile ...<br/>
+    <input type="radio" name="courseId" value="4" > Computer Network<br/>
+    <br/>
+    <input type="submit" name="submit" />
+    </form>
+</main>
+</body>
+</html>

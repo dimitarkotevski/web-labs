@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>Balloon Order page - Welcome and choose a Balloon</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to our Balloon Shop App</h1>
+</header>
+<main>
+
+    <ol>
+        <li th:each="balloon : ${balloons}">
+            <tr>
+                <td>
+                    <strong>Name: </strong> <th:span th:text="${balloon.getName()}"></th:span> <br>
+                    <strong>Description: </strong><th:span th:text=" ${balloon.getDescription()} "></th:span>
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        </li>
+    </ol>
+
+
+
+    <h2>Choose balloon color:</h2>
+    <form th:method="POST" th:action="@{selectBalloonSize}">
+        <input type="radio" name="color" value="Red Balloon"> Red Balloon<br/>
+        <input type="radio" name="color" value="Green Balloon"> Green Balloon<br/>
+        <input type="radio" name="color" value="Yellow Balloon"> Yellow Balloon<br/>
+        <input type="radio" name="color" value="Blue Balloon"> Blue Balloon<br/>
+
+        <br/>
+            <input type="submit" name="submit" />
+    </form>
+</main>
+</body>
+</html>

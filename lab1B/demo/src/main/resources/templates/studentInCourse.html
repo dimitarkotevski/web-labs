@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>WP lab - Students in Course</title>
+
+</head>
+<body>
+<header>
+  <h1>Students in Course </h1>
+</header>
+<section>
+  <div><th:span th:text="${courseName}"></th:span></div>
+  <ul>
+    <li th:each="stud : ${students}">
+      <tr>
+        <td>
+          <th:span th:text="${stud.name}"></th:span>
+          <th:span th:text="${stud.surname}"></th:span>
+        </td>
+      </tr>
+    </li>
+  </ul>
+  <a href="/AddStudent">Back</a>
+</section>
+
+</body>
+</html>
