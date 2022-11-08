@@ -7,10 +7,12 @@ public class Balloon {
     Long id;
     String name;
     String description;
-    public Balloon(String name, String description) {
+    Manufacture manufacture;
+    public Balloon(String name, String description, Manufacture manufacture) {
         this.id = (long)(Math.random()*1000);
         this.name = name;
         this.description = description;
+        this.manufacture = manufacture;
     }
     public String getName() {
         return name;

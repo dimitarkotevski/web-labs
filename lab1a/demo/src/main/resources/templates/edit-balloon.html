@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Add balloon</title>
+</head>
+<body>
+<h1>Edit balloon</h1>
+<form th:method="POST" th:action="@{'/balloons/edit/{id}' (id=${balloon.getId()})}">
+  <label>Name</label>
+          <input type="text" name="name" th:value="(${balloon} != null ? ${balloon.getName()} : '' )" placeholder="Enter balloon name"/><br>
+  <label>Description</label>
+          <input type="text" name="description" th:value="(${balloon} != null ? ${balloon.getDescription()} : '' )" placeholder="Enter description"/><br>
+    <h3>Manufactures</h3>
+  <ol th:each="manufacture : ${manufactures}" >
+      <input
+              th:checked=" (${balloon.getManufacture()} == ${manufacture} ) "
+              type="radio" name="manufacture" th:value="${manufacture.getId()}"> <th:span th:text="${manufacture.getName()}"> </th:span>
+  </ol>
+    <input type="submit" value="Save">
+    <a href="/balloons">Back</a>
+</form>
+</body>
+</html>

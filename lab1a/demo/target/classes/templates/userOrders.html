@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User orders</title>
+</head>
+<body>
+<h1>Orders for the user</h1>
+<li th:each="order : ${orders}">
+    <th:span th:text="${order.getBalloonColor()}"></th:span> ---
+    <th:span th:text="${order.getBalloonSize()}"></th:span>  ---
+    <th:span th:text="${order.getClientName()}"></th:span>  ---
+    <th:span th:text="${order.getClientAddress()}"></th:span>
+</li>
+</body>
+</html>

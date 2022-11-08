@@ -1,5 +1,8 @@
 package mk.finki.ukim.mk.lab1.web.servlets;
 
+import mk.finki.ukim.mk.lab1.bootstrap.DataHolder;
+import mk.finki.ukim.mk.lab1.model.Balloon;
+import mk.finki.ukim.mk.lab1.model.Order;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -25,6 +28,7 @@ public class ConfirmationInfoServlet extends HttpServlet {
         String clientAddress = req.getParameter("clientAddress");
         String color=(String) req.getSession().getAttribute("color");
         String size=(String)req.getSession().getAttribute("size");
+        Order order=new Order(color,size,clientName,clientAddress);
         String ipAddress=req.getRemoteAddr();
         String browser=req.getHeader("user-agent");
         if (clientName == null || clientName.isEmpty()){
@@ -47,6 +51,7 @@ public class ConfirmationInfoServlet extends HttpServlet {
         context.setVariable("ipAddress", ipAddress);
         context.setVariable("browser",browser);
         springTemplateEngine.process("confirmationInfo.html", context, resp.getWriter());
+        DataHolder.balloons.add(new Balloon( color,size,null));
         HttpSession session = req.getSession(false);
         if (session != null) {
             session.invalidate();
