@@ -38,7 +38,7 @@ public class BalloonController {
     @PostMapping("/add")
     public String saveBalloon(@RequestParam String name,@RequestParam String description,@RequestParam Long manufacture){
         Manufacture manu=DataHolder.manufactures.stream().filter(m->m.getId().equals(manufacture)).findFirst().get();
-        DataHolder.balloons.add(new Balloon(name,description, manu ));
+        this.balloonService.addBalloon(name,description, manu);
         return "redirect:/balloons";
     }
     @GetMapping("/add")
@@ -92,4 +92,5 @@ public class BalloonController {
         model.addAttribute("orders",this.orderService.allOrders());
         return "userOrders";
     }
+
 }

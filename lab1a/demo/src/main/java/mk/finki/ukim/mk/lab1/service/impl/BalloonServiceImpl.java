@@ -40,4 +40,9 @@ public class BalloonServiceImpl implements BalloonService {
     public void changeBalloon(Long id,String name,String description, Manufacture manufacture) {
         this.balloonRepository.changeBalloon(id,name,description,manufacture);
     }
+
+    @Override
+    public void addBalloon(String name, String description, Manufacture manufacture) {
+        this.balloonRepository.addBalloon(name,description,manufacture);
+    }
 }

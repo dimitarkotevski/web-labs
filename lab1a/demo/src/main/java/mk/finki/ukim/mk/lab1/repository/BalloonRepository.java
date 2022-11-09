@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 
 @Repository
 public  class BalloonRepository {
+    public void addBalloon(String name, String description, Manufacture manufacture){
+        DataHolder.balloons.add(new Balloon(name,description,manufacture));
+    }
     public List<Balloon> findAllBalloons(){
         return DataHolder.balloons;
     }
