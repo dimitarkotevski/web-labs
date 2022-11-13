@@ -17,10 +17,10 @@
     <h1 style="color: red"> <th:span th:text="${error}"></th:span> </h1>
 </header>
 <main>
+    <button> <a href="/balloons/add"> Create new Balloon </a></button><br/> <br/>
     <form th:method="GET" th:action="@{/balloons/changeOrder}">
         <input type="submit" value="Order">
     </form>
-    <button> <a href="/balloons/add"> Create new Balloon </a></button>
     <ol>
         <li th:each="balloon : ${balloons}">
             <tr>
