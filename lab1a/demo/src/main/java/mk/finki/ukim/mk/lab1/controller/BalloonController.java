@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -33,6 +36,28 @@ public class BalloonController {
         }
         model.addAttribute("balloons",this.balloonService.listAll());
         return "listBalloons";
+    }
+    @GetMapping("/changeOrder")
+    public String changeOrder(Model model){
+
+        if(DataHolder.order){
+            Collections.sort( DataHolder.balloons , new Comparator<>() {
+                @Override
+                public int compare(Balloon b1, Balloon b2) {
+                    return  b1.getName().compareTo(b2.getName());
+                }
+            });
+        }else{
+            Collections.sort( DataHolder.balloons , new Comparator<>() {
+                @Override
+                public int compare(Balloon b1, Balloon b2) {
+                    return  b2.getName().compareTo(b1.getName());
+                }
+            });
+        }
+
+        DataHolder.order=!DataHolder.order;
+        return "redirect:/balloons";
     }
 
     @PostMapping("/add")

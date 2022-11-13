@@ -14,6 +14,7 @@ public class DataHolder {
     public static List<Balloon> balloons = new ArrayList<>();
     public static List<Order> orders = new ArrayList<>();
     public static List<Manufacture> manufactures =new ArrayList<>();
+    public static boolean order=true;
 
     @PostConstruct
     public void init(){
@@ -25,11 +26,11 @@ public class DataHolder {
         manufactures.add(manufacture2);
 
         //Data
-        balloons.add(new Balloon("balon1","balon1 description", manufacture));
-        balloons.add(new Balloon("balon2","balon2 description", manufacture2));
-        balloons.add(new Balloon("balon3","balon3 description", manufacture1));
-        balloons.add(new Balloon("balon4","balon4 description", manufacture1));
-        balloons.add(new Balloon("balon5","balon5 description", manufacture1));
+        balloons.add(new Balloon("A3","balon1 description", manufacture));
+        balloons.add(new Balloon("Z","balon2 description", manufacture2));
+        balloons.add(new Balloon("A1","balon3 description", manufacture1));
+        balloons.add(new Balloon("C","balon4 description", manufacture1));
+        balloons.add(new Balloon("M5","balon5 description", manufacture1));
 
         orders.add(new Order("red","10","Dime","Demir Hisar"));
         orders.add(new Order("green","15","Ivan","Debar"));
