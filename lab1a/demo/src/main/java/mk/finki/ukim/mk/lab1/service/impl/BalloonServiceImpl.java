@@ -2,7 +2,7 @@ package mk.finki.ukim.mk.lab1.service.impl;
 
 import mk.finki.ukim.mk.lab1.model.Balloon;
 import mk.finki.ukim.mk.lab1.model.Manufacture;
-import mk.finki.ukim.mk.lab1.repository.BalloonRepository;
+import mk.finki.ukim.mk.lab1.repository.inMemory.InMemoryBalloonRepository;
 import mk.finki.ukim.mk.lab1.service.interfaces.BalloonService;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +10,9 @@ import java.util.List;
 
 @Service
 public class BalloonServiceImpl implements BalloonService {
-    private final BalloonRepository balloonRepository;
+    private final InMemoryBalloonRepository balloonRepository;
 
-    public BalloonServiceImpl(BalloonRepository balloonRepository) {
+    public BalloonServiceImpl(InMemoryBalloonRepository balloonRepository) {
         this.balloonRepository = balloonRepository;
     }
 

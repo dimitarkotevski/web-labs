@@ -1,4 +1,4 @@
-package mk.finki.ukim.mk.lab1.repository;
+package mk.finki.ukim.mk.lab1.repository.inMemory;
 
 import mk.finki.ukim.mk.lab1.bootstrap.DataHolder;
 import mk.finki.ukim.mk.lab1.model.Balloon;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public  class BalloonRepository {
+public  class InMemoryBalloonRepository {
     public void addBalloon(String name, String description, Manufacture manufacture){
         DataHolder.balloons.add(new Balloon(name,description,manufacture));
     }

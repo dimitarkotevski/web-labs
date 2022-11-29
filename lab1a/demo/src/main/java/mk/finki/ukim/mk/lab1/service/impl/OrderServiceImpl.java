@@ -1,8 +1,7 @@
 package mk.finki.ukim.mk.lab1.service.impl;
 
-import mk.finki.ukim.mk.lab1.bootstrap.DataHolder;
 import mk.finki.ukim.mk.lab1.model.Order;
-import mk.finki.ukim.mk.lab1.repository.OrderRepository;
+import mk.finki.ukim.mk.lab1.repository.inMemory.InMemoryOrderRepository;
 import mk.finki.ukim.mk.lab1.service.interfaces.OrderService;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +9,9 @@ import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-    private final OrderRepository orderRepository;
+    private final InMemoryOrderRepository orderRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(InMemoryOrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 

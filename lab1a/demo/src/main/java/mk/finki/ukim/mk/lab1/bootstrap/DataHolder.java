@@ -3,6 +3,7 @@ package mk.finki.ukim.mk.lab1.bootstrap;
 import mk.finki.ukim.mk.lab1.model.Balloon;
 import mk.finki.ukim.mk.lab1.model.Manufacture;
 import mk.finki.ukim.mk.lab1.model.Order;
+import mk.finki.ukim.mk.lab1.model.User;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +15,8 @@ public class DataHolder {
     public static List<Balloon> balloons = new ArrayList<>();
     public static List<Order> orders = new ArrayList<>();
     public static List<Manufacture> manufactures =new ArrayList<>();
+    public static List<User> users=new ArrayList<>();
+
     public static boolean order=true;
 
     @PostConstruct
@@ -37,5 +40,8 @@ public class DataHolder {
         orders.add(new Order("blue","6","Ace","Demir Kapija"));
         orders.add(new Order("yellow","20","Miki","Bitola"));
         orders.add(new Order("white","16","Tija","Skopje"));
+
+        User user=new User("dime","dime");
+        users.add(user);
     }
 }
