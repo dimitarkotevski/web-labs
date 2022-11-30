@@ -1,6 +1,8 @@
 package mk.finki.ukim.mk.lab1.service.impl;
 
+import mk.finki.ukim.mk.lab1.model.Balloon;
 import mk.finki.ukim.mk.lab1.model.Order;
+import mk.finki.ukim.mk.lab1.model.User;
 import mk.finki.ukim.mk.lab1.repository.inMemory.InMemoryOrderRepository;
 import mk.finki.ukim.mk.lab1.service.interfaces.OrderService;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order placeOrder(String balloonColor, String clientName, String address) {
-        Order order=new Order(balloonColor,"13",clientName,address);
+        User user=new User(address,"");
+        Balloon balloon=new Balloon(balloonColor,"",null);
+        Order order=new Order(balloon,user);
         this.orderRepository.placeOrder(order);
         return order;
     }

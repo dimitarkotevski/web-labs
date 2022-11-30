@@ -3,6 +3,7 @@ package mk.finki.ukim.mk.lab1.web.servlets;
 import mk.finki.ukim.mk.lab1.bootstrap.DataHolder;
 import mk.finki.ukim.mk.lab1.model.Balloon;
 import mk.finki.ukim.mk.lab1.model.Order;
+import mk.finki.ukim.mk.lab1.model.User;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -28,7 +29,9 @@ public class ConfirmationInfoServlet extends HttpServlet {
         String clientAddress = req.getParameter("clientAddress");
         String color=(String) req.getSession().getAttribute("color");
         String size=(String)req.getSession().getAttribute("size");
-        Order order=new Order(color,size,clientName,clientAddress);
+        User user=new User(clientAddress,"");
+        Balloon balloon=new Balloon(color,size,null);
+        Order order=new Order(balloon,user);
         String ipAddress=req.getRemoteAddr();
         String browser=req.getHeader("user-agent");
         if (clientName == null || clientName.isEmpty()){
