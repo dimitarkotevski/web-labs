@@ -2,7 +2,8 @@ package mk.finki.ukim.mk.lab1.service.impl;
 
 import mk.finki.ukim.mk.lab1.model.Balloon;
 import mk.finki.ukim.mk.lab1.model.Manufacture;
-import mk.finki.ukim.mk.lab1.repository.inMemory.InMemoryBalloonRepository;
+import mk.finki.ukim.mk.lab1.model.exception.BalloonNotFoundRepository;
+import mk.finki.ukim.mk.lab1.repository.BalloonRepository;
 import mk.finki.ukim.mk.lab1.service.interfaces.BalloonService;
 import org.springframework.stereotype.Service;
 
@@ -10,15 +11,16 @@ import java.util.List;
 
 @Service
 public class BalloonServiceImpl implements BalloonService {
-    private final InMemoryBalloonRepository balloonRepository;
+    private final BalloonRepository balloonRepository;
 
-    public BalloonServiceImpl(InMemoryBalloonRepository balloonRepository) {
+    public BalloonServiceImpl(BalloonRepository balloonRepository) {
         this.balloonRepository = balloonRepository;
     }
 
+
     @Override
     public List<Balloon> listAll() {
-        return this.balloonRepository.findAllBalloons();
+        return this.balloonRepository.findAll();
     }
 
     @Override
@@ -32,17 +34,21 @@ public class BalloonServiceImpl implements BalloonService {
     }
 
     @Override
-    public Balloon findById(Long id) {
-        return this.findById(id);
+    public Balloon findBalloonById(Long id) {
+        return this.balloonRepository.findById(id).orElseThrow(BalloonNotFoundRepository::new);
     }
 
     @Override
     public void changeBalloon(Long id,String name,String description, Manufacture manufacture) {
-        this.balloonRepository.changeBalloon(id,name,description,manufacture);
+        Balloon balloon=this.balloonRepository.findById(id).orElseThrow(BalloonNotFoundRepository::new);
+        balloon.setName(name);
+        balloon.setDescription(description);
+        balloon.setManufacture(manufacture);
+        this.balloonRepository.save(balloon);
     }
 
     @Override
     public void addBalloon(String name, String description, Manufacture manufacture) {
-        this.balloonRepository.addBalloon(name,description,manufacture);
+        this.balloonRepository.save(new Balloon(name,description,manufacture));
     }
 }

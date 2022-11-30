@@ -22,7 +22,7 @@
     <h3>Manufactures:</h3>
     <ol th:each="manufacture : ${manufactures}" >
         <input
-                type="radio" name="manufacture" th:value="${manufacture.getId()}"> <th:span th:text="${manufacture.getName()}"> </th:span>
+                type="radio" name="manufactureId" th:value="${manufacture.getId()}"> <th:span th:text="${manufacture.getName()}"> </th:span>
     </ol>
     <input type="submit" value="Save">
     <a href="/balloons">Back</a>

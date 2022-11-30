@@ -60,8 +60,8 @@ public class BalloonController {
     }
 
     @PostMapping("/add")
-    public String saveBalloon(@RequestParam String name,@RequestParam String description,@RequestParam Long manufacture){
-        Manufacture manu=DataHolder.manufactures.stream().filter(m->m.getId().equals(manufacture)).findFirst().get();
+    public String saveBalloon(@RequestParam String name,@RequestParam String description,@RequestParam Long manufactureId){
+        Manufacture manu=this.manufacturerService.findById(manufactureId);
         this.balloonService.addBalloon(name,description, manu);
         return "redirect:/balloons";
     }
@@ -73,7 +73,7 @@ public class BalloonController {
 
     @PostMapping("/edit/{id}")
     public String editBalloon(@PathVariable Long id, @RequestParam String name,@RequestParam String description,@RequestParam Long manufacture){
-        Manufacture manu=DataHolder.manufactures.stream().filter(m->m.getId().equals(manufacture)).findFirst().get();
+        Manufacture manu=this.manufacturerService.findById(manufacture);
         this.balloonService.changeBalloon(id,name,description,manu);
         return "redirect:/balloons";
     }
@@ -88,10 +88,10 @@ public class BalloonController {
     public String getEditBalloonPage(@PathVariable Long id,Model model){
         Balloon balloon=null;
         try{
-            if(DataHolder.balloons.stream().filter(b->b.getId().equals(id))==null){
+            if(this.balloonService.findBalloonById(id)==null){
                 return "redirect:/balloons";
             }
-            balloon=DataHolder.balloons.stream().filter(b->b.getId().equals(id)).findFirst().get();
+            balloon=this.balloonService.findBalloonById(id);
             List<Manufacture> manufactureList =this.manufacturerService.findAll();
 
             model.addAttribute("balloon",balloon);

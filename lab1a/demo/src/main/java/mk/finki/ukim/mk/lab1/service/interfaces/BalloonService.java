@@ -13,7 +13,7 @@ public interface BalloonService {
     List<Balloon> searchByNameOrDescription(String text);
 
     void deleteBalloon(Long id);
-    Balloon findById(Long id);
+    Balloon findBalloonById(Long id);
 
     void changeBalloon(Long id,String name,String description, Manufacture manufacture);
     void addBalloon( String name, String description,Manufacture manufacture );
