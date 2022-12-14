@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order to which card?</title>
+    <style>
+        .all_together {
+            max-width: 700px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="all_together">
+    <li style="text-decoration: none" th:each="shop : ${shoppingCardList}">
+        <tr>
+            <td>
+                <input type="radio" name="shop" th:value="${shop.getDateCreated()}">
+                <th:span th:text="${shop.ge}"><br/>
+                    <!--                            <strong>Name: </strong> <th:span th:text="${balloon.name}"></th:span> <br>-->
+                    <!--                            <strong>Description: </strong><th:span th:text=" ${balloon.description} "></th:span>-->
+            </td>
+        </tr>
+    </li>
+</div>
+</body>
+</html>

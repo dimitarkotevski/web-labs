@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -28,12 +29,14 @@ public class BalloonController {
     }
 
     @GetMapping()
-    public String getBalloonPage(@RequestParam(required = false) String error, Model model){
+    public String getBalloonPage(@RequestParam(required = false) String error,
+                                 Model model, HttpServletRequest request){
         if(error!=null && !error.isEmpty()){
             model.addAttribute("hasError",true);
             model.addAttribute("error",error);
         }
         model.addAttribute("balloons",this.balloonService.listAll());
+        model.addAttribute("user",request.getSession().getAttribute("user"));
         return "listBalloons";
     }
     @GetMapping("/changeOrder")
@@ -114,7 +117,7 @@ public class BalloonController {
     @GetMapping("/orders")
     public String getOrders(Model model){
         model.addAttribute("orders",this.orderService.allOrders());
-        return "userOrders";
+        return "user-orders";
     }
 
 }

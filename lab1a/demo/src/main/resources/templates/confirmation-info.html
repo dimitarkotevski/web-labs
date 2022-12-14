@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="utf-8">
+  <title>WP lab - Confirmation Info</title>
+  <style type="text/css">
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    tr:hover {background-color: #d5d0d0;}
+  </style>
+</head>
+<body>
+<section>
+  <header>
+    <h1>Balloon Order page - Order confirmation </h1>
+  </header>
+  <table>
+    <tr>
+      <th colspan="2">
+        Your Order Status
+      </th>
+    </tr>
+    <tr>
+      <td><b>First Name</b></td>
+      <td><th:span th:text="${user.name}"></th:span></td>
+    </tr>
+    <tr>
+      <td><b>Last Name </b></td>
+      <td> <th:span th:text="${user.surname}"></th:span> </td>
+    </tr>
+    <tr>
+      <td><b>Balloon Color </b></td>
+      <td> <th:span th:text="${name}"></th:span> </td>
+    </tr>
+    <tr>
+      <td><b>Balloon Size </b></td>
+      <td> <th:span th:text="${size}"></th:span></td>
+    </tr>
+  </table>
+  <div>
+    <form action="get" th:action="@{/order/new-order}">
+      <input type="submit" value="Confirm">
+    </form>
+  </div>
+</section>
+</body>
+</html>

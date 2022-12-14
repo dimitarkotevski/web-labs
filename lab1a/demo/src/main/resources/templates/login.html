@@ -5,15 +5,70 @@
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
+<!--  <link rel="stylesheet" href="./css/loginStyle.css">-->
+  <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    form {
+      width: 600px;
+      border: 3px solid #f1f1f1;
+    }
+    form h1{
+      padding-left: 20px;
+    }
+    input[type=text], input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #04AA6D;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      opacity: 0.8;
+    }
+    .container {
+      padding: 16px;
+    }
+    span.psw {
+      float: right;
+      padding-top: 16px;
+    }
+    @media screen and (max-width: 300px) {
+      span.psw {
+        display: block;
+        float: none;
+      }
+      .cancelbtn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-<form  method="post" action="/login">
-  <label for="username">Username</label>
-  <input id="username" name="username" type="text"><br/>
-  <label for="password">Password</label>
-  <input id="password" name="password" type="password"><br/>
-  <button type="submit"> Log in </button>
+
+<form method="post" action="/login">
+  <h1>Please Login</h1>
+  <div class="container">
+    <input type="text" placeholder="Username" name="username" required>
+
+    <input type="password" placeholder="Password" name="password" required>
+
+    <button type="submit">Login</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
 </form>
+
 <div th:if="${hasError}">
   <th:block th:text="${error}"></th:block>
 </div>

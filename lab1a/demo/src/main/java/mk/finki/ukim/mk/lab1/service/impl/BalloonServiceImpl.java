@@ -24,7 +24,7 @@ public class BalloonServiceImpl implements BalloonService {
     }
 
     @Override
-    public List<Balloon> searchByNameOrDescription(String text) {
+    public Balloon searchByNameOrDescription(String text) {
         return this.balloonRepository.findAllByNameOrDescription(text);
     }
 

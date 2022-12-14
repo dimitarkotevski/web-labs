@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -34,6 +35,8 @@ public class LoginController {
         try{
             user=loginService.login(username,password);
             request.getSession().setAttribute("user",user);
+            model.addAttribute("username",username);
+            request.setAttribute("username",username);
             return "redirect:/balloons";
         }
         catch(WrongCredentialsException exception){
@@ -42,5 +45,10 @@ public class LoginController {
             return "login";
 
         }
+    }
+    @GetMapping("/logout")
+    public String logoutUser(HttpServletRequest request) throws ServletException {
+        request.getSession().removeAttribute("user");
+        return "redirect:/login";
     }
 }

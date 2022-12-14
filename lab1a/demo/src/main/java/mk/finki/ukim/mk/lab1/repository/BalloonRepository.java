@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface BalloonRepository extends JpaRepository<Balloon,Long> {
-    @Query("select b from Balloon b where b.name like '%{:text}%' ")
-    List<Balloon> findAllByNameOrDescription(String text);
+    @Query("select b from Balloon b where b.name = :text")
+    Balloon findAllByNameOrDescription(String text);
 
 }

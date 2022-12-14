@@ -2,7 +2,6 @@ package mk.finki.ukim.mk.lab1.service.interfaces;
 
 import mk.finki.ukim.mk.lab1.model.Balloon;
 import mk.finki.ukim.mk.lab1.model.Manufacture;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
 public interface BalloonService {
 
     List<Balloon> listAll();
-    List<Balloon> searchByNameOrDescription(String text);
+    Balloon searchByNameOrDescription(String text);
 
     void deleteBalloon(Long id);
     Balloon findBalloonById(Long id);

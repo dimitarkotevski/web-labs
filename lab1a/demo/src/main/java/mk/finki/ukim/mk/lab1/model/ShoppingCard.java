@@ -1,6 +1,7 @@
 package mk.finki.ukim.mk.lab1.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public class ShoppingCard {
     private Long id;
     @ManyToOne
     private User user;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dateCreated;
     @OneToMany
     private List<Order> orders;
