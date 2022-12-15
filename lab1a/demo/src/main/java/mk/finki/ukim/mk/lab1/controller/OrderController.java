@@ -34,8 +34,10 @@ public class OrderController {
 
     @GetMapping
     public String getOrders(Model model,HttpServletRequest request){
-        model.addAttribute("user",request.getSession().getAttribute("user"));
+            User user=(User)request.getSession().getAttribute("user");
+        model.addAttribute("user",user);
         model.addAttribute("orders",this.orderService.allOrders());
+        model.addAttribute("listShoppingCards", this.shoppingCardService.getAllShoppingCardFromWithUserId(user.getId()));
         return "user-orders";
     }
 
@@ -70,22 +72,15 @@ public class OrderController {
         return "redirect:/order";
     }
     //Put order in the shopping card
-    @GetMapping("/toShoppingCard/{id}")
-    public String getOrderInfo(@PathVariable Long id,Model model,HttpServletRequest request){
-            Order order=this.orderService.getOrderById(id);
+    @PostMapping("/toShoppingCard")
+    public String getOrderInfo(String orderId, String shoppingCardId,Model model,HttpServletRequest request){
+            Order order=this.orderService.getOrderById(Long.parseLong(orderId));
             model.addAttribute("order",order);
             User user=(User)request.getSession().getAttribute("user");
-            List<ShoppingCard> shoppingCardList=user.getCards();
-            model.addAttribute("shoppingCardList",shoppingCardList);
-            return "order-to-card";
-    }
-    @PostMapping("/toShoppingCard/{id}")
-    public String putOrderInSelectedShoppingCard(@PathVariable Long id,Model model,HttpServletRequest request){
-        Order order=this.orderService.getOrderById(id);
-        User user=(User)request.getSession().getAttribute("user");
-        ShoppingCard shoppingCard=this.shoppingCardService.getShoppingCardWithId(user.getId());
-        shoppingCard.getOrders().add(order);
-        this.shoppingCardService.saveShoppingCard(shoppingCard);
-        return "shopping-card";
+            ShoppingCard shoppingCard=this.shoppingCardService.getShoppingCardWithId(Long.parseLong(shoppingCardId));
+            shoppingCard.getOrders().add(order);
+            shoppingCard.setUser(user);
+            this.shoppingCardService.saveShoppingCard(shoppingCard);
+            return "redirect:/order";
     }
 }

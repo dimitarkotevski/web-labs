@@ -74,6 +74,56 @@
                 border: 1px solid #ccc;
             }
         }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th{
+            background-color: #d5d0d0;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:hover {background-color: #d5d0d0;}
+
+        .button {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: red;
+            border: none;
+            color: #FFFFFF;
+            padding: 10px;
+            text-align: center;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+        .button span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+        .button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+        input[type=submit]{
+            background-color: #2196F3;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
@@ -91,9 +141,30 @@
 </div>
 <div class="all_together">
     <h1>Orders for the user</h1>
-    <li th:each="order : ${orders}">
-        <th:span th:text="${order.balloon.name}"></th:span> <br/>
-    </li>
+    <table>
+        <tr>
+        <th>Order</th>
+        <th>Choose Shopping card</th>
+        <th>Add to shopping card</th>
+        </tr>
+        <tr th:each="order : ${orders}">
+            <form  th:method="post" th:action="@{'/order/toShoppingCard/'}">
+
+            <td>
+                <input type="hidden" name="orderId" th:value="${order.getId()}">
+                <th:span th:text="${order.getBalloon().getName()}"></th:span>
+            </td>
+            <td>
+                <select name="shoppingCardId" >
+                    <option th:each="shop : ${listShoppingCards}" name="shoppingCardId" th:value="${shop.getId()}"> <th:block th:text="${shop.getDateCreated()}"></th:block> </option>
+                </select>
+            </td>
+            <td>
+                <input type="submit" value="Add">
+            </td>
+            </form>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

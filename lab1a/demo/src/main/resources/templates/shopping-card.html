@@ -90,15 +90,14 @@
     </div>
 </div>
 <div class="all_together">
-    <form th:action="@{/shopping-card/create}">
-        <input type="datetime-local" name="date"/>
-        <input type="submit" value="Create new shopping card">
+    <form th:action="@{/shopping-card/create}" th:method="post">
+        <input type="datetime-local" name="localDateTime"/><br/>
+        <input type="submit" value="Create new shopping card"><br/>
     </form>
-    <a href="/shopping-card/create"> Create new Shooping card</a>
     <h1>Shopping card for the user</h1>
     <ol>
         <li th:each="shop : ${shoppingCards}">
-            <a href="/shopping-list/withOrder/{id}">
+            <a th:href="@{'/shopping-card/{id}' (id=${shop.getId()})}">
                 <th:span th:text="${shop.getDateCreated()}"></th:span> <br/>
             </a>
         </li>
