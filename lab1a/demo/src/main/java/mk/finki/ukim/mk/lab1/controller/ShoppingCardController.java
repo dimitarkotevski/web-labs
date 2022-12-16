@@ -30,7 +30,7 @@ public class ShoppingCardController {
         shoppingCard.setDateCreated(LocalDateTime.parse(localDateTime));
         shoppingCard.setOrders(null);
         this.shoppingCardService.saveShoppingCard(shoppingCard);
-        List<ShoppingCard> shoppingCardList=this.shoppingCardService.getAllShoppingCardListed();
+//        List<ShoppingCard> shoppingCardList=this.shoppingCardService.getAllShoppingCardListed();
         model.addAttribute("shoppingCards",user.getCards());
         return "redirect:/shopping-card";
     }

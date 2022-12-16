@@ -2,7 +2,9 @@ package mk.finki.ukim.mk.lab1.controller;
 
 import mk.finki.ukim.mk.lab1.model.User;
 import mk.finki.ukim.mk.lab1.model.exception.WrongCredentialsException;
+import mk.finki.ukim.mk.lab1.repository.UserRepository;
 import mk.finki.ukim.mk.lab1.service.interfaces.LoginService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,16 +14,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/login")
 public class LoginController {
     private final LoginService loginService;
+    private final UserRepository userRepository;
 
-    public LoginController(LoginService loginService) {
+    public LoginController(LoginService loginService, UserRepository userRepository) {
         this.loginService = loginService;
+        this.userRepository = userRepository;
     }
-
     @GetMapping
     public String showLoginPage(){
         return "login";

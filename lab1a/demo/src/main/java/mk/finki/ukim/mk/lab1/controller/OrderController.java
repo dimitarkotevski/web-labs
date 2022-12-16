@@ -7,6 +7,7 @@ import mk.finki.ukim.mk.lab1.model.User;
 import mk.finki.ukim.mk.lab1.service.interfaces.BalloonService;
 import mk.finki.ukim.mk.lab1.service.interfaces.OrderService;
 import mk.finki.ukim.mk.lab1.service.interfaces.ShoppingCardService;
+import org.postgresql.core.Parser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,10 +77,10 @@ public class OrderController {
     public String getOrderInfo(String orderId, String shoppingCardId,Model model,HttpServletRequest request){
             Order order=this.orderService.getOrderById(Long.parseLong(orderId));
             model.addAttribute("order",order);
-            User user=(User)request.getSession().getAttribute("user");
-            ShoppingCard shoppingCard=this.shoppingCardService.getShoppingCardWithId(Long.parseLong(shoppingCardId));
-            shoppingCard.getOrders().add(order);
-            shoppingCard.setUser(user);
+            ShoppingCard shoppingCard=shoppingCardService.getShoppingCardWithId(Long.valueOf(shoppingCardId));
+            List<Order> orderList=shoppingCard.getOrders();
+            orderList.add(order);
+            //shoppingCard.setOrders(orderList);
             this.shoppingCardService.saveShoppingCard(shoppingCard);
             return "redirect:/order";
     }

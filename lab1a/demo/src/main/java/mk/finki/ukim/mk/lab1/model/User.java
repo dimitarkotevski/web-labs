@@ -4,8 +4,9 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import mk.finki.ukim.mk.lab1.model.UserFullname;
 
 @Data
 @Entity
@@ -15,18 +16,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String surname;
-    private String username;
+    @Convert(converter = UserNameConverter.class)
+    private UserFullname  personFullName;
     private String password;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDate dateOfBirth;
+    private LocalDateTime dateOfBirth;
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<ShoppingCard> cards;
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 
     public User() {
 
