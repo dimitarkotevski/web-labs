@@ -6,6 +6,11 @@ public class UserFullname implements Serializable {
     private String name ;
     private String surname;
 
+    public UserFullname(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
     public String getName() {
         return name;
     }
