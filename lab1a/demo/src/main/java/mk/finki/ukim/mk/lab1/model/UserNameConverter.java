@@ -8,6 +8,9 @@ public class UserNameConverter implements AttributeConverter<UserFullname,String
     public String SEPARATOR=" ";
     @Override
     public String convertToDatabaseColumn(UserFullname userFullname) {
+        if(userFullname==null){
+            return "";
+        }
         return userFullname.getName()+" "+userFullname.getSurname();
     }
 

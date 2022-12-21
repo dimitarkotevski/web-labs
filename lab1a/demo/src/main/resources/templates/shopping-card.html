@@ -74,6 +74,17 @@
                 border: 1px solid #ccc;
             }
         }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:hover {background-color: #d5d0d0;}
     </style>
 </head>
 <body>
@@ -95,13 +106,20 @@
         <input type="submit" value="Create new shopping card">
     </form>
     <h1>Shopping card for the user</h1>
-    <ol>
-        <li th:each="shop : ${shoppingCards}">
-            <a th:href="@{'/shopping-card/{id}' (id=${shop.getId()})}">
-                <th:span th:text="${shop.getDateCreated()}"></th:span> <br/>
-            </a>
-        </li>
-    </ol>
+    <table>
+        <th>ShoppinCardId</th>
+        <th>Shopping Card Date</th>
+        <tr th:each="shop : ${shoppingCards}">
+            <td>
+                <th:span th:text="${shop.getId()}"></th:span> <br/>
+            </td>
+            <td>
+                <a th:href="@{'/shopping-card/{id}' (id=${shop.getId()})}">
+                    <th:span th:text="${shop.getDateCreated()}"></th:span> <br/>
+                </a>
+            </td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

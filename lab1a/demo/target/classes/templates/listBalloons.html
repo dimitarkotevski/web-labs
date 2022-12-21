@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <title>Balloon Order page - Welcome and choose a Balloon</title>
@@ -135,12 +135,25 @@
 <div class="topnav">
     <a class="active" href="#"><th:span th:text="${user}"></th:span> </a>
     <a href="/balloons">Home</a>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <a href="/order">Orders</a>
+        <a href="/shopping-card">Shopping Card</a>
+        <div class="login-container">
+            <form th:action="@{/logout}" th:method="get">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div sec:authorize="hasRole('ROLE_USER')">
     <a href="/order">Orders</a>
     <a href="/shopping-card">Shopping Card</a>
     <div class="login-container">
         <form th:action="@{/logout}" th:method="get">
             <button type="submit">Logout</button>
         </form>
+    </div>
     </div>
 </div>
 <div class="all_together">
@@ -149,15 +162,19 @@
         <h1 style="color: red"> <th:span th:text="${error}"></th:span> </h1>
     </header>
     <main>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
         <button class="createBalloon"> <a href="/balloons/add"> Create new Balloon </a></button><br/> <br/>
         <form th:method="GET" th:action="@{/balloons/changeOrder}">
             <input type="submit" value="Order">
         </form>
+        </div>
         <table>
             <th>Name</th>
             <th>Description</th>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
             <th>Edit</th>
             <th>Delete</th>
+            </div>
             <tr  th:each="balloon : ${balloons}">
                 <td>
                     <th:span th:text="${balloon.name}"></th:span>
@@ -165,6 +182,7 @@
                 <td>
                     <th:span th:text=" ${balloon.description} "></th:span>
                 </td>
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <td>
                     <a th:href="@{'/balloons/edit-form/{id}' (id=${balloon.getId()})}"> Edit</a>
                 </td>
@@ -173,11 +191,11 @@
                         <button class="button" type="submit">Delete</button>
                     </form>
                 </td>
+                </div>
             </tr>
         </table>
 
-
-
+<div sec:authorize="hasRole('ROLE_USER')">
         <h2>Choose balloon color:</h2>
         <form th:method="POST" th:action="@{/order/selectBalloon}">
 
@@ -195,6 +213,7 @@
             <br/><br>
             <input type="submit" name="submit" />
         </form>
+</div>
     </main>
 </div>
 </body>

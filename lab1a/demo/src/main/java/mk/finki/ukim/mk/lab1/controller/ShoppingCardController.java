@@ -38,12 +38,16 @@ public class ShoppingCardController {
     @GetMapping()
     public String getShoppingCard(Model model, HttpServletRequest request){
         String user=request.getRemoteUser();
-        model.addAttribute("shoppingCards",this.userService.getUserByUserName(user).getCards());
+        if(user=="admin"){
+            model.addAttribute("shoppingCards",this.shoppingCardService.getAllShoppingCardListed());
+        }else{
+            model.addAttribute("shoppingCards",this.userService.getUserByUserName(user).getCards());
+        }
         model.addAttribute("username",user);
         return "shopping-card";
     }
     @GetMapping("/{id}")
-    public String getShoppingCardInfo(@PathVariable Long id,Model model){
+    public String getShoppingCardInfo(@PathVariable Long id,Model model, HttpServletRequest request){
         ShoppingCard shoppingCard=this.shoppingCardService.getShoppingCardWithId(id);
         model.addAttribute("shoppingCard",shoppingCard);
         return "shopping-card-info";
