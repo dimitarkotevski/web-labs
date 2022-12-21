@@ -36,26 +36,16 @@ public class BalloonController {
             model.addAttribute("error",error);
         }
         model.addAttribute("balloons",this.balloonService.listAll());
-        model.addAttribute("user",request.getSession().getAttribute("user"));
+        model.addAttribute("user",request.getRemoteUser());
         return "listBalloons";
     }
     @GetMapping("/changeOrder")
     public String changeOrder(Model model){
 
         if(DataHolder.order){
-            Collections.sort( DataHolder.balloons , new Comparator<>() {
-                @Override
-                public int compare(Balloon b1, Balloon b2) {
-                    return  b1.getName().compareTo(b2.getName());
-                }
-            });
+            model.getAttribute("balloons");
         }else{
-            Collections.sort( DataHolder.balloons , new Comparator<>() {
-                @Override
-                public int compare(Balloon b1, Balloon b2) {
-                    return  b2.getName().compareTo(b1.getName());
-                }
-            });
+            model.getAttribute("balloons");
         }
 
         DataHolder.order=!DataHolder.order;

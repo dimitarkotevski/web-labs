@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shoppiing Card Info</title>
+    <style>
+        @media screen and (max-width: 600px) {
+            .topnav .login-container {
+                float: none;
+            }
+            .topnav a, .topnav input[type=text], .topnav .login-container button {
+                float: none;
+                display: block;
+                text-align: left;
+                width: 100%;
+                margin: 0;
+                padding: 14px;
+            }
+            .topnav input[type=text] {
+                border: 1px solid #ccc;
+            }
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:hover {background-color: #d5d0d0;}
+    </style>
+</head>
+<body>
+<table>
+    <th>OrderId</th>
+    <th>Balloon Name</th>
+    <th>Balloon Description</th>
+    <tr  th:each="order : ${shoppingCard.getOrders()}">
+        <td>
+            <th:span th:text="${order.getId()}"></th:span>
+        </td>
+        <td>
+            <th:span th:text="${order.getBalloon().getName()}"></th:span>
+        </td>
+        <td>
+            <th:span th:text="${order.getBalloon().getDescription()}"></th:span>
+        </td>
+    </tr>
+</table>
+
+<a href="/shopping-card">Back</a>
+</body>
+</html>

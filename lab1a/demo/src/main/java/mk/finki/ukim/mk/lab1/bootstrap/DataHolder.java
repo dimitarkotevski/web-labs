@@ -23,18 +23,6 @@ public class DataHolder {
 
     public static boolean order=true;
     //repositories
-    private final UserRepository userRepository;
-    private final ManufactureRepository manufactureRepository;
-    private final OrderRepository orderRepository;
-    private final BalloonRepository balloonRepository;
-
-
-    public DataHolder(UserRepository userRepository, ManufactureRepository manufactureRepository, OrderRepository orderRepository, BalloonRepository balloonRepository) {
-        this.userRepository = userRepository;
-        this.manufactureRepository = manufactureRepository;
-        this.orderRepository = orderRepository;
-        this.balloonRepository = balloonRepository;
-    }
 
     @PostConstruct
     public void init(){

@@ -46,9 +46,8 @@ public class LoginController {
 
         }
     }
-    @GetMapping("/logout")
-    public String logoutUser(HttpServletRequest request) throws ServletException {
-        request.getSession().removeAttribute("user");
-        return "redirect:/login";
+    @GetMapping("/login?error=BadCredentials")
+    public String errorShow(){
+        return "";
     }
 }

@@ -17,7 +17,7 @@ public class ShoppingCard {
     private User user;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dateCreated;
-    @OneToMany
+    @ManyToMany
     private List<Order> orders;
 
     public ShoppingCard(User user, LocalDateTime dateCreated, List<Order> orders) {

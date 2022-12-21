@@ -133,13 +133,12 @@
 </head>
 <body>
 <div class="topnav">
-    <a class="active" href="#"><th:span th:text="${user.username}"></th:span> </a>
+    <a class="active" href="#"><th:span th:text="${user}"></th:span> </a>
     <a href="/balloons">Home</a>
     <a href="/order">Orders</a>
     <a href="/shopping-card">Shopping Card</a>
     <div class="login-container">
-        <form method="get" action="/login/logout">
-
+        <form th:action="@{/logout}" th:method="get">
             <button type="submit">Logout</button>
         </form>
     </div>
