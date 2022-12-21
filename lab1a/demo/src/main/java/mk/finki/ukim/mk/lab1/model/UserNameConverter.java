@@ -13,8 +13,11 @@ public class UserNameConverter implements AttributeConverter<UserFullname,String
 
     @Override
     public UserFullname convertToEntityAttribute(String fullName) {
-        String name=fullName.split(SEPARATOR)[0];
-        String surname=fullName.split(SEPARATOR)[1];
-        return new UserFullname(name,surname);
+        if(fullName!=null){
+            String name=fullName.split(SEPARATOR)[0];
+            String surname=fullName.split(SEPARATOR)[1];
+            return new UserFullname(name,surname);
+        }
+        return new UserFullname("","");
     }
 }

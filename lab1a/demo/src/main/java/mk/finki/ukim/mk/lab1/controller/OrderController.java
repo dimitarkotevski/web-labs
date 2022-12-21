@@ -3,6 +3,7 @@ package mk.finki.ukim.mk.lab1.controller;
 import mk.finki.ukim.mk.lab1.model.Balloon;
 import mk.finki.ukim.mk.lab1.model.Order;
 import mk.finki.ukim.mk.lab1.model.ShoppingCard;
+import mk.finki.ukim.mk.lab1.model.User;
 import mk.finki.ukim.mk.lab1.service.interfaces.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,8 +49,10 @@ public class OrderController {
     }
     @PostMapping("/confirm-info")
     public String confirmInfo(String size,String name,Model model, HttpServletRequest request, HttpServletResponse response){
-        model.addAttribute("user",request.getRemoteUser());
-        model.addAttribute("name",request.getSession().getAttribute("name"));
+            User user =this.userService.getUserByUserName(request.getRemoteUser());
+        model.addAttribute("user",user);
+        String name1= (String) request.getSession().getAttribute("name");
+        model.addAttribute("nameBalloon",name1);
         model.addAttribute("size",size);
         return "confirmation-info";
     }
@@ -75,9 +78,9 @@ public class OrderController {
         Order order=this.orderService.getOrderById(id);
         ShoppingCard shoppingCard=this.shoppingCardService.getShoppingCardWithId(Long.valueOf(shoppingCardId));
         shoppingCard.getOrders().add(order);
-        if(!shoppingCard.getOrders().contains(order)){
+        order.getCards().add(shoppingCard);
+        //this.orderService.save(order);
             this.shoppingCardService.saveShoppingCard(shoppingCard);
-        }
         return "redirect:http://localhost:8181/shopping-card/"+shoppingCardId;
     }
 }

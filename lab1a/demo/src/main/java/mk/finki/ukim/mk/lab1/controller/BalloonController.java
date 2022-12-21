@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -35,17 +36,23 @@ public class BalloonController {
             model.addAttribute("hasError",true);
             model.addAttribute("error",error);
         }
-        model.addAttribute("balloons",this.balloonService.listAll());
+        if(DataHolder.order){
+            model.addAttribute("balloons",this.balloonService.balloonOrderAsc());
+        }else{
+            model.addAttribute("balloons",this.balloonService.balloonOrderDesc());
+        }
         model.addAttribute("user",request.getRemoteUser());
         return "listBalloons";
     }
     @GetMapping("/changeOrder")
-    public String changeOrder(Model model){
+    public String changeOrder(Model model, HttpServletRequest request){
 
         if(DataHolder.order){
-            model.getAttribute("balloons");
+            request.getSession().removeAttribute("balloons");
+            request.getSession().setAttribute("balloons",this.balloonService.balloonOrderAsc());
         }else{
-            model.getAttribute("balloons");
+            request.getSession().removeAttribute("balloons");
+            request.getSession().setAttribute("balloons",this.balloonService.balloonOrderDesc());
         }
 
         DataHolder.order=!DataHolder.order;

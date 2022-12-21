@@ -29,15 +29,15 @@
     </tr>
     <tr>
       <td><b>First Name</b></td>
-      <td><th:span th:text="${user.name}"></th:span></td>
+      <td><th:span th:text="${user.getPersonFullName().getName()}"></th:span></td>
     </tr>
     <tr>
       <td><b>Last Name </b></td>
-      <td> <th:span th:text="${user.surname}"></th:span> </td>
+      <td> <th:span th:text="${user.getPersonFullName().getSurname()}"></th:span> </td>
     </tr>
     <tr>
       <td><b>Balloon Color </b></td>
-      <td> <th:span th:text="${name}"></th:span> </td>
+      <td> <th:span th:text="${nameBalloon}"></th:span> </td>
     </tr>
     <tr>
       <td><b>Balloon Size </b></td>

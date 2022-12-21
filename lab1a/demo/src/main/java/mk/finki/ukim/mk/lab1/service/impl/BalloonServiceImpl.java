@@ -51,4 +51,14 @@ public class BalloonServiceImpl implements BalloonService {
     public void addBalloon(String name, String description, Manufacture manufacture) {
         this.balloonRepository.save(new Balloon(name,description,manufacture));
     }
+
+    @Override
+    public List<Balloon> balloonOrderAsc() {
+        return this.balloonRepository.orderAsc();
+    }
+
+    @Override
+    public List<Balloon> balloonOrderDesc() {
+        return this.balloonRepository.orderDesc();
+    }
 }
