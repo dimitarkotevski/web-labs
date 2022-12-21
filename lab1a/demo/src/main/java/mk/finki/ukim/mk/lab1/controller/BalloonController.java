@@ -46,15 +46,13 @@ public class BalloonController {
     }
     @GetMapping("/changeOrder")
     public String changeOrder(Model model, HttpServletRequest request){
-
-        if(DataHolder.order){
-            request.getSession().removeAttribute("balloons");
-            request.getSession().setAttribute("balloons",this.balloonService.balloonOrderAsc());
-        }else{
-            request.getSession().removeAttribute("balloons");
-            request.getSession().setAttribute("balloons",this.balloonService.balloonOrderDesc());
-        }
-
+//        if(DataHolder.order){
+//            request.getSession().removeAttribute("balloons");
+//            request.getSession().setAttribute("balloons",this.balloonService.balloonOrderAsc());
+//        }else{
+//            request.getSession().removeAttribute("balloons");
+//            request.getSession().setAttribute("balloons",this.balloonService.balloonOrderDesc());
+//        }
         DataHolder.order=!DataHolder.order;
         return "redirect:/balloons";
     }
