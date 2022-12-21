@@ -3,6 +3,7 @@ package mk.finki.ukim.mk.lab1.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -15,6 +16,9 @@ public class Order {
     Balloon balloon;
     @ManyToOne
     User user;
+    @ManyToMany
+    private List<ShoppingCard> cards;
+
     public Order(Balloon balloon, User user) {
         this.balloon=balloon;
         this.user = user;

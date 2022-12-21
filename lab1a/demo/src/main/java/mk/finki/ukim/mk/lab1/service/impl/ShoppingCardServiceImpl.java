@@ -17,6 +17,11 @@ public class ShoppingCardServiceImpl implements ShoppingCardService {
     }
 
     @Override
+    public List<ShoppingCard> getAllShoppingCardFromWithUserId(Long id) {
+        return this.shoppingCardRepository.getUserShoppingCard(id);
+    }
+
+    @Override
     public List<ShoppingCard> getAllShoppingCardListed() {
         return this.shoppingCardRepository.findAll();
     }
