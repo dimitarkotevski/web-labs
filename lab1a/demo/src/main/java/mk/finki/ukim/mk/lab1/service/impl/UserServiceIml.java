@@ -17,4 +17,9 @@ public class UserServiceIml implements UserService {
     public User getUserByUserName(String username) {
         return this.userRepository.findByUsername(username);
     }
+
+    @Override
+    public User register(User user) {
+        return this.userRepository.save(user);
+    }
 }

@@ -175,7 +175,7 @@
             <th>Edit</th>
             <th>Delete</th>
             </div>
-            <tr  th:each="balloon : ${balloons}">
+            <tr class="balloon-row"  th:each="balloon : ${balloons}">
                 <td>
                     <th:span th:text="${balloon.name}"></th:span>
                 </td>
@@ -184,10 +184,10 @@
                 </td>
                 <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <td>
-                    <a th:href="@{'/balloons/edit-form/{id}' (id=${balloon.getId()})}"> Edit</a>
+                    <a class="edit-balloon" th:href="@{'/balloons/edit-form/{id}' (id=${balloon.getId()})}"> Edit</a>
                 </td>
                 <td>
-                    <form th:method="delete" th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()}  ) }">
+                    <form class="delete-balloon" th:method="delete" th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()}  ) }">
                         <button class="button" type="submit">Delete</button>
                     </form>
                 </td>

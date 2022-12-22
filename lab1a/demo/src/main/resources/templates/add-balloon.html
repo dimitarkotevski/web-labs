@@ -16,12 +16,12 @@
 
 <form th:method="POST" th:action="@{/balloons/add}">
     <label>Name</label><br>
-    <input type="text" name="name" placeholder="Enter balloon name"/><br>
+    <input type="text" class="name" name="name" placeholder="Enter balloon name"/><br>
     <label>Description</label><br>
-    <input type="text" name="description" placeholder="Enter description"/><br>
+    <input type="text" class="description" name="description" placeholder="Enter description"/><br>
     <h3>Manufactures:</h3>
     <ol th:each="manufacture : ${manufactures}" >
-        <input
+        <input class="manufactureId"
                 type="radio" name="manufactureId" th:value="${manufacture.getId()}"> <th:span th:text="${manufacture.getName()}"> </th:span>
     </ol>
     <input type="submit" value="Save">

@@ -61,4 +61,14 @@ public class BalloonServiceImpl implements BalloonService {
     public List<Balloon> balloonOrderDesc() {
         return this.balloonRepository.orderDesc();
     }
+
+    @Override
+    public void deleteById(Long id) {
+        this.balloonRepository.deleteById(id);
+    }
+
+    @Override
+    public Balloon save(String name, String description, Manufacture manufacture) {
+        return this.balloonRepository.save(new Balloon(name,description,manufacture));
+    }
 }

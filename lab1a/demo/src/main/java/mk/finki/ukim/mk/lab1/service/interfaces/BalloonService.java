@@ -4,6 +4,7 @@ import mk.finki.ukim.mk.lab1.model.Balloon;
 import mk.finki.ukim.mk.lab1.model.Manufacture;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 
 public interface BalloonService {
@@ -20,4 +21,8 @@ public interface BalloonService {
     List<Balloon> balloonOrderAsc();
 
     List<Balloon> balloonOrderDesc();
+
+    void deleteById(Long id);
+
+    Balloon save(String name, String description, Manufacture manufacture);
 }

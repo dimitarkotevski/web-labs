@@ -24,4 +24,9 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public Manufacture findById(Long manufactureId) {
         return this.manufacturerRepository.findById(manufactureId).orElseThrow(ManuFactureNotFoundException::new);
     }
+
+    @Override
+    public Manufacture save(String name1, String country1, String address1) {
+        return this.manufacturerRepository.save(new Manufacture(name1,country1,address1));
+    }
 }

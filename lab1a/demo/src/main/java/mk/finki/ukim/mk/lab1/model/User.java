@@ -25,6 +25,14 @@ public class User {
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
     private List<ShoppingCard> cards;
 
+    public User( String name, String username, UserFullname personFullName, String password, LocalDateTime dateOfBirth, List<ShoppingCard> cards) {
+        this.name = name;
+        this.username = username;
+        this.personFullName = personFullName;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+        this.cards = cards;
+    }
 
     public User() {
 

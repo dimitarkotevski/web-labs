@@ -25,7 +25,7 @@ import java.util.Optional;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BalloonControllerTest {
-    Manufacture manufacturer1 = new Manufacture("manufacturer1", "country1", "address1");
+    Manufacture manufacturer = new Manufacture("manufacturer1", "country1", "address1");
     Long BALLOON_ID = Integer.toUnsignedLong(1000);
     @Mock
     private BalloonRepository balloonRepository;
@@ -37,17 +37,25 @@ public class BalloonControllerTest {
         MockitoAnnotations.initMocks(this);
 
 
-        Balloon balloon = new Balloon("name", "description", manufacturer1);
+        Balloon balloon = new Balloon("name", "description", manufacturer);
         balloon.setId(BALLOON_ID);
 
         Mockito.when(this.balloonRepository.save(Mockito.any(Balloon.class))).thenReturn(balloon);
-        Mockito.when(this.manufacturerRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(manufacturer1));
+        Mockito.when(this.manufacturerRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(manufacturer));
 
         this.service = Mockito.spy(new BalloonServiceImpl(this.balloonRepository));
     }
     @Test
     public void testSuccessBalloonAdd() {
+        Balloon balloon = this.service.save("name", "description", manufacturer);
 
+        Mockito.verify(this.service).save("name", "description", manufacturer);
+
+        Assert.assertNotNull("User is null", balloon);
+        Assert.assertEquals("Name doesn't match", "name", balloon.getName());
+        Assert.assertEquals("Description doesn't match", "description", balloon.getDescription());
+        Assert.assertEquals("Manufacturer doesn't match", manufacturer, balloon.getManufacture());
+        //Assert.assertEquals("BalloonType doesn't match", balloonType, balloon.getName());
     }
 
 

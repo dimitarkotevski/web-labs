@@ -8,4 +8,6 @@ import java.util.List;
 public interface ManufacturerService {
     List<Manufacture> findAll();
     Manufacture findById(Long manufactureId);
+
+    Manufacture save(String name1, String country1, String address1);
 }
