@@ -51,46 +51,63 @@ public class SeleniumScenarioTest {
 //        driver = new ChromeDriver();
         initData();
     }
+
     @AfterEach
     public void destroy() {
-            if (this.driver != null) {
-                this.driver.close();
-            }
-
-            if (!balloonService.listAll().isEmpty()) {
-                if (!shoppingCartRepository.findAll().isEmpty()) {
-                    ShoppingCard shoppingCart = shoppingCartService.getAllShoppingCardFromWithUserId(regularUser.getId()).get(0);
-                    shoppingCartRepository.delete(shoppingCart);
-                }
-
-                balloonService.deleteById(balloonService.listAll().get(0).getId());
-            }
+        if (this.driver != null) {
+            this.driver.close();
         }
 
-        private void initData() {
-            if (!dataInitialized) {
-                m1 = manufacturerService.save("Name1", "Country1", "Address1");
-
-                regularUser = userService.register(new User(user, user, new UserFullname(user,user), user, LocalDateTime.now(),null));
-                adminUser = userService.register(new User(admin, admin, new UserFullname(admin,admin), admin, LocalDateTime.now(),null));
-
-                dataInitialized = true;
+        if (!balloonService.listAll().isEmpty()) {
+            if (!shoppingCartRepository.findAll().isEmpty()) {
+                ShoppingCard shoppingCart = shoppingCartService.getAllShoppingCardFromWithUserId(regularUser.getId()).get(0);
+                shoppingCartRepository.delete(shoppingCart);
             }
+
+            balloonService.deleteById(balloonService.listAll().get(0).getId());
         }
-        @Test
-        public void testScenarioBalloonsPageNoUser() {
+    }
+
+    private void initData() {
+        if (!dataInitialized) {
+            m1 = manufacturerService.save("Name1", "Country1", "Address1");
+
+            regularUser = userService.register(new User(user, user, new UserFullname(user, user), user, LocalDateTime.now(), null));
+            adminUser = userService.register(new User(admin, admin, new UserFullname(admin, admin), admin, LocalDateTime.now(), null));
+
+            dataInitialized = true;
+        }
+    }
+
+    @Test
+    public void testScenarioBalloonsPageNoUser() {
         BalloonsPage balloonsPage = BalloonsPage.to(this.driver);
         balloonsPage.assertElements(0, 0, 0, 0);
+    }
+
+    @Test
+    public void testScenarioBalloonsPageRegularUser() {
+        LoginPage loginPage = LoginPage.openLoginPage(this.driver);
+        BalloonsPage balloonsPage = LoginPage.login(this.driver, loginPage, regularUser.getUsername(), user);
+        balloonsPage.assertElements(0, 0, 0, 0);
+
+        balloonService.save("test", "test", m1);
+
+        balloonsPage = BalloonsPage.to(this.driver);
+        balloonsPage.assertElements(1, 0, 0, 1);
     }
     @Test
     public void testScenarioBalloonsPageAdminUser() {
         LoginPage loginPage = LoginPage.openLoginPage(this.driver);
-
         BalloonsPage balloonsPage = LoginPage.login(this.driver, loginPage, adminUser.getUsername(), admin);
         balloonsPage.assertElements(0, 0, 0, 0);
 
-        balloonsPage = AddBalloonPage.addBalloon(this.driver, "test", "test");
-        balloonsPage.assertElements(1, 1, 1, 1);
+        balloonService.save("test", "test", m1);
+
+        balloonsPage = BalloonsPage.to(this.driver);
+        balloonsPage.assertElements(1, 0, 0, 1);
     }
+
+
 
 }
