@@ -39,12 +39,12 @@ public class BalloonServiceImpl implements BalloonService {
     }
 
     @Override
-    public void changeBalloon(Long id,String name,String description, Manufacture manufacture) {
-        Balloon balloon=this.balloonRepository.findById(id).orElseThrow(BalloonNotFoundRepository::new);
+    public Balloon changeBalloon(Long id,String name,String description, Manufacture manufacture) {
+        Balloon balloon= this.balloonRepository.getBalloonById(id).orElseThrow(BalloonNotFoundRepository::new);
         balloon.setName(name);
         balloon.setDescription(description);
         balloon.setManufacture(manufacture);
-        this.balloonRepository.save(balloon);
+        return this.balloonRepository.save(balloon);
     }
 
     @Override

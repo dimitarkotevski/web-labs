@@ -1,7 +1,6 @@
 package mk.finki.ukim.mk.lab1.controller;
 
 import mk.finki.ukim.mk.lab1.model.ShoppingCard;
-import mk.finki.ukim.mk.lab1.model.User;
 import mk.finki.ukim.mk.lab1.service.interfaces.ShoppingCardService;
 import mk.finki.ukim.mk.lab1.service.interfaces.UserService;
 import org.springframework.stereotype.Controller;
@@ -9,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Controller

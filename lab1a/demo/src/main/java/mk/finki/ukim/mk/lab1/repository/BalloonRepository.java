@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BalloonRepository extends JpaRepository<Balloon,Long> {
@@ -16,4 +17,6 @@ public interface BalloonRepository extends JpaRepository<Balloon,Long> {
     List<Balloon> orderAsc();
     @Query("select b from Balloon b order by b.name desc ")
     List<Balloon> orderDesc();
+    @Query("select b from Balloon b where b.id=:id")
+    Optional<Balloon> getBalloonById(Long id);
 }

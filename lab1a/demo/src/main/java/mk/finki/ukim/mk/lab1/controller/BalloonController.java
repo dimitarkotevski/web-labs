@@ -11,9 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -32,6 +29,7 @@ public class BalloonController {
     @GetMapping()
     public String getBalloonPage(@RequestParam(required = false) String error,
                                  Model model, HttpServletRequest request){
+        model.addAttribute("hasError",true);
         if(error!=null && !error.isEmpty()){
             model.addAttribute("hasError",true);
             model.addAttribute("error",error);

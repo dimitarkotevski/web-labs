@@ -14,7 +14,7 @@ public interface BalloonService {
     void deleteBalloon(Long id);
     Balloon findBalloonById(Long id);
 
-    void changeBalloon(Long id,String name,String description, Manufacture manufacture);
+    Balloon changeBalloon(Long id,String name,String description, Manufacture manufacture);
     void addBalloon( String name, String description,Manufacture manufacture );
 
     List<Balloon> balloonOrderAsc();
