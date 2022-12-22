@@ -195,7 +195,7 @@
             </tr>
         </table>
 
-<div sec:authorize="hasRole('ROLE_USER')">
+<div sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
         <h2>Choose balloon color:</h2>
         <form th:method="POST" th:action="@{/order/selectBalloon}">
 
